@@ -47,7 +47,7 @@ module.exports={
     },
     reportPostValidation:{ //{ userID, postID, comment } = req.body;
         body:Joi.object().keys({
-            userID:Joi.string().required(),
+           
             postID:Joi.string().required(),
             comment:Joi.string().required()
         }),
