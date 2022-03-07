@@ -20,7 +20,7 @@ app.use(userRouter);
 app.use(postRouter);
 
 dbConnection();
-// app.get('*', (req, res) => {
-//     res.sendFile(`index.html`, { root: www });
-// });
+app.get('/', (req, res) => {
+    res.send(`<h1 style="text-align:center"> Welcome in Blog API</h1>`);
+});
 app.listen(port, () => console.log(`listening on http://localhost:${port}`));
