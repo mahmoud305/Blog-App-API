@@ -1,0 +1,595 @@
+{
+	"info": {
+		"_postman_id": "144c7b3d-7342-4509-ac04-0329166629a2",
+		"name": "Final Exam",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User API's",
+			"item": [
+				{
+					"name": "signUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"random5\",\r\n    \"email\":\"007c8ad5f9@dragonmail.live\",\r\n    \"password\": \"aaa\"  ,\r\n    \"cPassword\":\"aaa\",\r\n    \"phone\":\"01155113935\",\r\n    \"location\":\"Cairo Giza\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"mayo@gmail.com\",\r\n    \"password\":\"mayo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTQ1M2I3MDUzMWIyMjU4ODYxMWJlNSIsImVtYWlsIjoiYmIzY2QxMzY5NkBkcmFnb25tYWlsLmxpdmUiLCJpYXQiOjE2NDU1NDc2NjksImV4cCI6MTY0NTU1MTI2OX0.XQzQKeislK4vV5YOQN-q0nn8XgLB1sf5B6T1-yJ0-4U",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"rrandom\",\r\n    \"location\":\"Giza,Cairo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/updateUser/621453030531b22588611bdd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"updateUser",
+								"621453030531b22588611bdd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTQyZDNkYjhjMDNjODY5ODI4Yjk1NyIsImVtYWlsIjoibWF5bzNnbWFpbC5jb20iLCJpYXQiOjE2NDU1Njk2MjAsImV4cCI6MTY0NTU3MzIyMH0.LDDMiuluDQCxzSukqnLcwWj4m15ySFygUpTnOb4vcoo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\":\"mayo\",\r\n    \"newPassword\":\"aaa1\",\r\n    \"cNewPassword\":\"aaa1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/updateUserPassword/62142d3db8c03c869828b957",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"updateUserPassword",
+								"62142d3db8c03c869828b957"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forget Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"007c8ad5f9@dragonmail.live\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/forgetPassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"forgetPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dectivate User Account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTQyYWZmOTQwZjNjZmUyMmQxNDNjNiIsImVtYWlsIjoibWF5bzJnbWFpbC5jb20iLCJpYXQiOjE2NDU1NjcxMDEsImV4cCI6MTY0NTU3MDcwMX0.h6UPATP7s-XHdcsCkLm_MtZ5jWYLwOdnGCCEZvzk_fQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/dectivateUserAccount/62142aff940f3cfe22d143c6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"dectivateUserAccount",
+								"62142aff940f3cfe22d143c6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin API's",
+			"item": [
+				{
+					"name": "delete Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTQxMzZlMzEzZDkwN2UzNDVhNDRjYiIsImVtYWlsIjoibWF5b0BnbWFpbC5jb20iLCJpYXQiOjE2NDU1NzM1MjAsImV4cCI6MTY0NTU3NzEyMH0.L4Efkw16j_A5AQRvzqA5KSLvpJ9CViVh7UwfaZUXIX8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/deleteAdminAccount/62142aff940f3cfe22d143c6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"deleteAdminAccount",
+								"62142aff940f3cfe22d143c6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Block User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTQyYWZmOTQwZjNjZmUyMmQxNDNjNiIsImVtYWlsIjoibWF5bzJnbWFpbC5jb20iLCJpYXQiOjE2NDU1NzE3NzIsImV4cCI6MTY0NTU3NTM3Mn0.XjO-mvG6M-dJ_k2fTNy_ahmpEa5ujHK116ckClISY3M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/blockUserAccount/62143c6f5e3b7518c94ed739",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"blockUserAccount",
+								"62143c6f5e3b7518c94ed739"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Admin List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTQxMzZlMzEzZDkwN2UzNDVhNDRjYiIsImVtYWlsIjoibWF5b0BnbWFpbC5jb20iLCJpYXQiOjE2NDU1NzkwOTAsImV4cCI6MTY0NTU4MjY5MH0.erTCIjvijW5MufjINGvLLO4eD6BC4hjZBlg5x1nZm5M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/getAdminList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"getAdminList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/addAdmin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"addAdmin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post API's",
+			"item": [
+				{
+					"name": "add post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTQ1MzAzMDUzMWIyMjU4ODYxMWJkZCIsImVtYWlsIjoiZTU3YTY4ZjY4Y0BkcmFnb25tYWlsLmxpdmUiLCJpYXQiOjE2NDU2NjI4MjQsImV4cCI6MTY0NTY2NjQyNH0.NdBkDLliN5D8L4lI302YRkZGnbueLeq-9qI8G3JFtuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\" post 4\",\r\n    \"desc\":\"description four \",\r\n    \"CreatedBy\":\"621453030531b22588611bdd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/addPost",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"addPost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTU0YzZkOGEwYmI1ODcwOTNhNjQ0MSIsImVtYWlsIjoiMDA3YzhhZDVmOUBkcmFnb25tYWlsLmxpdmUiLCJpYXQiOjE2NDU2MjI1NjUsImV4cCI6MTY0NTYyNjE2NX0.ZzIIsxSysaDQND7I26GSbJpCLGnAT8RbhtMdjv1uSTM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"new tilte One\",\r\n    \"desc\":\"description one \"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/editPost/621637eaa2ac98f13a5d06f6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"editPost",
+								"621637eaa2ac98f13a5d06f6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTU0YzZkOGEwYmI1ODcwOTNhNjQ0MSIsImVtYWlsIjoiMDA3YzhhZDVmOUBkcmFnb25tYWlsLmxpdmUiLCJpYXQiOjE2NDU2Mjk1MDgsImV4cCI6MTY0NTYzMzEwOH0.sjIzAgFbt_HQs_Zxa-Y1uAk_95dwXaN8k8CzJP9UnDg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5000/deletePost/62163813a2ac98f13a5d06f9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"deletePost",
+								"62163813a2ac98f13a5d06f9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Profile Posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTU0YzZkOGEwYmI1ODcwOTNhNjQ0MSIsImVtYWlsIjoiMDA3YzhhZDVmOUBkcmFnb25tYWlsLmxpdmUiLCJpYXQiOjE2NDU2Mjk1MDgsImV4cCI6MTY0NTYzMzEwOH0.sjIzAgFbt_HQs_Zxa-Y1uAk_95dwXaN8k8CzJP9UnDg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/getProfilePosts/62154c6d8a0bb587093a6441?pageNum=1&pageSize=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"getProfilePosts",
+								"62154c6d8a0bb587093a6441"
+							],
+							"query": [
+								{
+									"key": "pageNum",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get ALL Posts for Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/getAllPosts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"getAllPosts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get All posts for Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/getAllUsersPosts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"getAllUsersPosts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Report a Post",
+			"item": [
+				{
+					"name": "Report a Post",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\":\"621433d8f89b13c2789b618b\" ,\r\n    \"postID\": \"6216d29eb341c3670ee6d615\",\r\n    \"comment\":\" this is not a normal post it political one.\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/reportPost",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"reportPost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "review Reported Posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/reviewReportedPosts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"reviewReportedPosts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "block Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTQxMzZlMzEzZDkwN2UzNDVhNDRjYiIsImVtYWlsIjoibWF5b0BnbWFpbC5jb20iLCJpYXQiOjE2NDU2NjQzOTYsImV4cCI6MTY0NTY2Nzk5Nn0.ekaCKTU4HB9mKhG6os3KNud8_YkMaXNEgpREUg7tZQQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/blockPost/6216d29eb341c3670ee6d615",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"blockPost",
+								"6216d29eb341c3670ee6d615"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
