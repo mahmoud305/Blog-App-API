@@ -265,8 +265,8 @@ async function forgetPasswordHandler(req, res) {
 const getAllUsers = async (req, res) => {
     let { pageNum, pageSize } = req.query;
     //console.log(pageNum, pageSize);
-    pageSize = pageSize || 3;
-    pageNum = pageNum || 1;
+    // pageSize = pageSize || 3;
+    // pageNum = pageNum || 1;
     try {
         let  {skip , limit} = paginationHelper(pageNum, pageSize);
         let users = await userModel.find({ },' _id name email isVerified role').skip(skip).limit(limit);//.sort({"verified":-1}) to get the verified emails first . 

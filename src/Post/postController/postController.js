@@ -149,18 +149,22 @@ async function getAllUsersPosts(req, res) {
 
 
 async function reportPost(req, res) {
-    let { userID, postID, comment } = req.body;
+    let {  postID, comment } = req.body;
+    const token = getTokenFromHeader(req);
+    
     // const token = getTokenFromHeader(req);
     try {
+        const token_decoded = decodeToken(token); // remove the created b by from token .
+        let { id, email } = token_decoded;
         // let { id, email } = decodeToken(token);
-        const user = await getUser(userID, false);
+        const user = await getUser(id, false);
         const post = await checkPostExist(postID);
         if (post) {
 
             let oldData = await postModel.findOneAndUpdate({ _id: postID }, {
                 reported: true, $push: {
                     reportedBy: {
-                        user: userID,
+                        user: id,
                         comment
                     }
                 }
