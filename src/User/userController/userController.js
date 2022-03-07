@@ -4,7 +4,7 @@ const userModel = require("../userModel/userModel");
 const jwt = require("jsonwebtoken");
 const sendEmail = require("../../../common/Services/SendEmail");
 const { findOneAndUpdate } = require("../userModel/userModel");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const updateService = require("../../../common/Services/updateServices");
 const paginationHelper = require("../../../common/Services/paginationService");
 
