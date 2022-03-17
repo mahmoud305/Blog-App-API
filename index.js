@@ -15,7 +15,10 @@ const port = process.env.PORT || 4000 ;
 const dbConnection= require("./dbConfig/dbConfig");
 const postRouter = require('./src/Post/postRouter/postRouter');
 const userRouter = require('./src/User/userRouter/userRouter');
-
+var cors = require('cors')
+ 
+ 
+app.use(cors())
 app.use(userRouter);
 app.use(postRouter);
 
