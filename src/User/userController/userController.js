@@ -11,7 +11,7 @@ const paginationHelper = require("../../../common/Services/paginationService");
 
 function generateToken(id, email) {
     try {
-        let token = jwt.sign({ id, email }, process.env.JWT_SECREET_KEY, { expiresIn: '1h' })
+        let token = jwt.sign({ id, email }, process.env.JWT_SECREET_KEY, { expiresIn: '2d' })
         return token;
     } catch (error) {
         console.log("error in encoding the token, ", error);
