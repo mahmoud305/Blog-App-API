@@ -1,5 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
-const { decodeToken, failureCase, getTokenFromHeader, getUser, successCase } = require("../../../common/commonFunctions");
+const { decodeToken, failureCase, getTokenFromHeader, getUser, successCase, countObjects } = require("../../../common/commonFunctions");
 const paginationHelper = require("../../../common/Services/paginationService");
 const updateService = require("../../../common/Services/updateServices");
 
@@ -23,6 +23,10 @@ function checkPostExist(id) {
     })
 }
 
+
+
+
+
 async function addPost(req, res) {
     let { title, desc } = req.body;
     try {
@@ -34,7 +38,7 @@ async function addPost(req, res) {
             if (user.isBlocked) {
                 failureCase(res, "error in adding post.", "blocked user cannot add posts.", StatusCodes.BAD_REQUEST);
             } else {
-                let newPost = new postModel({ title, desc, CreatedBy:id });
+                let newPost = new postModel({ title, desc, CreatedBy: id });
                 console.log(newPost);
                 let data = await newPost.save();
                 successCase(res, data, "post added successfully.", StatusCodes.CREATED);
@@ -110,8 +114,10 @@ async function getProfilePosts(req, res) {
         let { id, email } = decodeToken(token);
         const user = await getUser(email);
         if (userId == id || user.role != "user") { // the owner of the post and the admin has the authority to delete a post.
-            let postDeleted = await postModel.find({ CreatedBy: userId }).skip(skip).limit(limit);
-            successCase(res, postDeleted);
+            let condition = { CreatedBy: userId };
+            let posts = await postModel.find(condition).skip(skip).limit(limit);
+            const totalCount = await countObjects( postModel,condition);
+            successCase(res, { totalCount, posts });
         }
 
     } catch (error) {
@@ -126,11 +132,14 @@ async function getAllPostsHandler(res, pageNum, pageSize, projection, validPosts
         let { skip, limit } = paginationHelper(pageNum, pageSize);
         // console.log(skip);
         //get the valid post for users and all post for admin
-        let posts = await postModel.find(validPosts ? { blocked: { $ne: true } } : {}, projection).populate({
+        const condition = validPosts ? { blocked: { $ne: true } } : {} ;
+        const totalCount = await countObjects( postModel,condition);
+        let posts = await postModel.find(condition , projection).populate({
             path: 'CreatedBy',
             select: 'name email _id'
         }).skip(skip).limit(limit);//.sort({"verified":-1}) to get the verified emails first . 
-        successCase(res, posts);
+        successCase(res, { totalCount, posts } );
+        // successCase(res, );
     } catch (error) {
         failureCase(res, error, "error in getting posts", StatusCodes.INTERNAL_SERVER_ERROR);
     }
@@ -149,9 +158,9 @@ async function getAllUsersPosts(req, res) {
 
 
 async function reportPost(req, res) {
-    let {  postID, comment } = req.body;
+    let { postID, comment } = req.body;
     const token = getTokenFromHeader(req);
-    
+
     // const token = getTokenFromHeader(req);
     try {
         const token_decoded = decodeToken(token); // remove the created b by from token .
@@ -185,11 +194,15 @@ async function reviewReportedPosts(req, res) {
     let { pageNum, pageSize } = req.query;
     const { skip, limit } = paginationHelper(pageNum, pageSize);
     try {
-        const reportedPosts = await postModel.find({ reported: true }).populate({
+        const condition = { reported: true };
+        const totalCount = await countObjects( postModel,condition);
+         
+        const posts = await postModel.find(condition).populate({
             path: 'CreatedBy reportedBy.user',
             select: 'name email _id'
         }).skip(skip).limit(limit);
-        successCase(res, reportedPosts, " ");
+        successCase(res, { totalCount, posts } );
+        // successCase(res, , " ");
     } catch (error) {
         failureCase(res, error, "error in getting reported posts", StatusCodes.INTERNAL_SERVER_ERROR);
     }
@@ -217,4 +230,7 @@ async function blockPost(req, res) {
     }
 }
 
-module.exports = { addPost, editPost, deletePost, getProfilePosts, getAllPosts, getAllUsersPosts, reportPost, reviewReportedPosts, blockPost }
+module.exports = {
+    addPost, editPost, deletePost, getProfilePosts, getAllPosts,
+    getAllUsersPosts, reportPost, reviewReportedPosts, blockPost
+}

@@ -1,5 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
-const { failureCase, successCase, hashingPassword, decodeToken, getTokenFromHeader, getUser } = require("../../../common/commonFunctions");
+const { failureCase, successCase, hashingPassword, decodeToken, getTokenFromHeader, getUser, countObjects } = require("../../../common/commonFunctions");
 const userModel = require("../userModel/userModel");
 const jwt = require("jsonwebtoken");
 const sendEmail = require("../../../common/Services/SendEmail");
@@ -122,7 +122,8 @@ function checkingHashedPassword(password, hashedPassword) {
 
 async function signin(req, res) {
     let { email, password } = req.body;
-    // console.log(req.body);
+    console.log("hello");
+    console.log(req.body);
 
     try {
         let user = await getUser(email);
@@ -269,8 +270,11 @@ const getAllUsers = async (req, res) => {
     // pageNum = pageNum || 1;
     try {
         let  {skip , limit} = paginationHelper(pageNum, pageSize);
-        let users = await userModel.find({ },' _id name email isVerified role').skip(skip).limit(limit);//.sort({"verified":-1}) to get the verified emails first . 
-        successCase(res, users);
+        const condition={};
+        let users = await userModel.find(condition,' _id name email isVerified role').skip(skip).limit(limit);//.sort({"verified":-1}) to get the verified emails first . 
+         
+        const totalCount = await countObjects( userModel,condition);
+        successCase(res, { totalCount, users });
     } catch (error) {
         failedCase(res, error, StatusCodes.INTERNAL_SERVER_ERROR);
     }
@@ -333,8 +337,11 @@ async function getAdminList(req, res) {
     const {pageNum,pageSize}=req.query;
     let {skip , limit}= paginationHelper(pageNum,pageSize);
     try {
-        let admins = await userModel.find({ role: "admin" }, 'name email role _id isVerified').skip(skip).limit(limit);
-        successCase(res, admins);
+        const condition={ role: "admin" } ;
+        let users = await userModel.find(condition , 'name email role _id isVerified').skip(skip).limit(limit);
+        const totalCount = await countObjects( userModel,condition);
+        successCase(res, { totalCount,users});
+         
     } catch (error) {
         failureCase(res, error, "error in get Admin List.", StatusCodes.INTERNAL_SERVER_ERROR);
     }

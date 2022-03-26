@@ -60,4 +60,24 @@ function getUser(userInfo, isEmail = true) {
     })
 }
 
-module.exports={successCase ,failureCase ,hashingPassword ,getTokenFromHeader ,decodeToken, getUser}
+function countObjects(model ,condition) {
+    return new Promise(async (x) => {
+        try {
+            // let objectCount = await postModel.find(condition).count();
+            let objectCount = await model.countDocuments(condition);
+
+            console.log(objectCount);
+            if (objectCount) {
+                x(objectCount);
+            }
+            else {
+                x(0);
+            }
+        } catch (error) {
+            console.log("error in counting posts . :");
+            x(0)
+        }
+    })
+}
+
+module.exports={successCase ,failureCase ,hashingPassword ,getTokenFromHeader ,decodeToken, getUser ,countObjects}
