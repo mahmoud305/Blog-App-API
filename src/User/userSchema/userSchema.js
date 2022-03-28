@@ -18,7 +18,7 @@ function encryptData(data) {
 
 function decryptData(data) {
     try {
-        console.log("info : ",info);
+        // console.log("info : ",info);
         const deCipher = crypto.createDecipheriv(process.env.ENCRYPTION_ALGORITHM,
             Buffer.from(process.env.ENCRYPTION_SECRUITY_KEY),
             Buffer.from(process.env.ENCRYPTION_INIT_VECTOR, 'hex'));
@@ -77,6 +77,16 @@ userSchema.pre("save", async function (next) {
     this.cPassword = this.password;//to hash the confirmation one .
     this.phone = encryptData(this.phone);
     console.log(this.phone);
+    // console.log(decryptData(this.phone));
+    next();
+})
+
+userSchema.post("findOne", async function (doc ,next) {
+    // this.password = await bcrypt.hash(this.password, 7);
+    console.log(doc.phone);
+     
+    doc.phone = decryptData(doc.phone);
+    console.log("log hello after find one: ", doc);
     // console.log(decryptData(this.phone));
     next();
 })

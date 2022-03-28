@@ -183,6 +183,17 @@ async function updateProfileHandler(req, res) {
     }
 }
 
+async function getUserById(req,res){
+    const {id}= req.params;
+    try {
+        const user= await getUser(id,false);
+        successCase(res,  user );
+    } catch (error) {
+        failureCase(res,error,"error in getting the user with id "+id);
+    }
+     
+}
+
 async function updatePasswordHandler(req, res) {
     const { id } = req.params;
     const { oldPassword, newPassword, cNewPassword } = req.body;
@@ -374,5 +385,5 @@ async function deleteAdmin(req,res){
 }
 module.exports = {
     signup, verifyEmail, signin, updateProfileHandler, updatePasswordHandler,
-    forgetPasswordHandler, passwordReset, dectivateAccount,addAdmin, blockAccount, getAdminList ,deleteAdmin ,getAllUsers
+    forgetPasswordHandler, passwordReset, dectivateAccount,addAdmin, blockAccount, getAdminList ,deleteAdmin ,getAllUsers ,getUserById
 };

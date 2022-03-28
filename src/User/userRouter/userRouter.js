@@ -1,8 +1,8 @@
 const authorization = require("../../../common/middleWare/authorization");
 const { signUpSchema, signInSchema, forgetPasswordSchema, updatePasswordSchema, deActivateaAccountSchema,
-     blockAccountSchema, verifyEmailSchema, deleteAdminSchema, updateUserProfileSchema, getAllUsersSchema } = require("../JoiValidation/endPointValidation");
-const { signup, verifyEmail, signin, updateProfileHandler, dectivateAccount, updatePasswordHandler, passwordReset, forgetPasswordHandler, getAdminList, blockAccount, deleteAdmin, addAdmin, getAllUsers } = require("../userController/userController");
-const { ADD_ADMIN, GET_ADMIN_LIST, SIGN_IN, SIGN_UP, FORGET_PASSWORD, UPDATE_PROFILE_HANDLER, UPDATE_USER_PASSWORD, DEACTIVATE_USER_ACCOUNT, BLOCK_USER_ACCOUNT, DELETE_ADMIN, GET_ALL_USERS } = require("../userEndPoints");
+     blockAccountSchema, verifyEmailSchema, deleteAdminSchema, updateUserProfileSchema, getAllUsersSchema, checkIdInParams } = require("../JoiValidation/endPointValidation");
+const { signup, verifyEmail, signin, updateProfileHandler, dectivateAccount, updatePasswordHandler, passwordReset, forgetPasswordHandler, getAdminList, blockAccount, deleteAdmin, addAdmin, getAllUsers, getUserById } = require("../userController/userController");
+const { ADD_ADMIN, GET_ADMIN_LIST, SIGN_IN, SIGN_UP, FORGET_PASSWORD, UPDATE_PROFILE_HANDLER, UPDATE_USER_PASSWORD, DEACTIVATE_USER_ACCOUNT, BLOCK_USER_ACCOUNT, DELETE_ADMIN, GET_ALL_USERS, GET_USER_BY_ID } = require("../userEndPoints");
 const validateRequest = require("./../../../common/middleWare/validateRequest");
 const userRouter = require("express").Router();
 
@@ -15,12 +15,13 @@ userRouter.put("/updateUserPassword/:id", authorization(UPDATE_USER_PASSWORD), v
 userRouter.put("/dectivateUserAccount/:id", authorization(DEACTIVATE_USER_ACCOUNT), validateRequest(deActivateaAccountSchema), dectivateAccount);
 userRouter.put("/blockUserAccount/:id", authorization(BLOCK_USER_ACCOUNT), validateRequest(blockAccountSchema), blockAccount);
 
+userRouter.get("/getUserById/:id", authorization(GET_USER_BY_ID), validateRequest(checkIdInParams), getUserById);
 userRouter.get("/getAllUsers", authorization(GET_ALL_USERS), validateRequest(getAllUsersSchema), getAllUsers);
 userRouter.get("/verifyUserEmail/:token", validateRequest(verifyEmailSchema), verifyEmail);
 userRouter.get("/ResetUserPassword/:token", passwordReset);
 userRouter.get("/getAdminList", authorization(GET_ADMIN_LIST), getAdminList);
 
-userRouter.delete("/deleteAdminAccount/:id", authorization(DELETE_ADMIN), validateRequest(deleteAdminSchema), deleteAdmin);
+userRouter.delete("/deleteAdminAccount/:id", authorization(DELETE_ADMIN), validateRequest(checkIdInParams), deleteAdmin);
 
 
 module.exports = userRouter;

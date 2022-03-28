@@ -47,6 +47,7 @@ function getUser(userInfo, isEmail = true) {
 
             let user = await userModel.findOne(isEmail ? { email: userInfo } : { _id: userInfo });
             if (user) {
+                // console.log(user);
                 callback(user);
             }
             else {

@@ -18,7 +18,7 @@ const userRouter = require('./src/User/userRouter/userRouter');
 var cors = require('cors')
  
  
-app.use(cors())
+app.use(cors());
 app.use(userRouter);
 app.use(postRouter);
 

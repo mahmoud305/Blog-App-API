@@ -61,7 +61,7 @@ module.exports = {
             id: Joi.string().required(),
         })
     },
-    deleteAdminSchema: {//const { id } = req.params;
+    checkIdInParams: {//const { id } = req.params;
         params: Joi.object().keys({
             id: Joi.string().required(),
         })
