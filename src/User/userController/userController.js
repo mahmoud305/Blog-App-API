@@ -160,14 +160,14 @@ async function signin(req, res) {
 async function updateProfileHandler(req, res) {
     const token = getTokenFromHeader(req);
     const { id } = req.params;
-    const { name, location } = req.body;
+    const { name, location ,phone } = req.body;
     const decoded_Token = decodeToken(token);
     if (decoded_Token) {
         if (decoded_Token.id == id) {// the user can only update itself 
             let userExist = await getUser(id, false);
             if (userExist) {
                 try {
-                    let oldData = await userModel.findOneAndUpdate({ _id: id }, { name, location });
+                    let oldData = await userModel.findOneAndUpdate({ _id: id }, { name, location,phone });
                     successCase(res, oldData, "user updated successfully.");
                 } catch (error) {
                     failureCase(res, error, "error in updating profile.", StatusCodes.INTERNAL_SERVER_ERROR);

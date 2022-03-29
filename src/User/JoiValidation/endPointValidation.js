@@ -28,6 +28,7 @@ module.exports = {
            
             name: Joi.string().min(2).required(),
             location: Joi.string().required().min(2),
+            phone:Joi.string().required(),
         }),
         params: Joi.object().keys({
             id: Joi.string().required(),
