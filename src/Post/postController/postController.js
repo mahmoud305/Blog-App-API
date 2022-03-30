@@ -137,7 +137,7 @@ async function getAllPostsHandler(res, pageNum, pageSize, projection, validPosts
         let posts = await postModel.find(condition , projection).populate({
             path: 'CreatedBy',
             select: 'name email _id'
-        }).skip(skip).limit(limit).sort({createdAt:-1}) to get the verified emails first . 
+        }).skip(skip).limit(limit).sort({createdAt:-1})// to get the verified emails first . 
         successCase(res, { totalCount, posts } );
         // successCase(res, );
     } catch (error) {
