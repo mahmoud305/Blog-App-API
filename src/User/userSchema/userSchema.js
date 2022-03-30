@@ -84,12 +84,14 @@ userSchema.pre("save", async function (next) {
 userSchema.pre("findOneAndUpdate", async function (next) {
     // this.password = await bcrypt.hash(this.password, 7);
     console.log("before the doc of update *********************");
-    const tempPhone=this._update.phone;
+    
+    // const tempPhone=this._update.phone;
 
-    console.log(tempPhone);
-   
+    // console.log(tempPhone);
+   if(this._update.phone){
    this._update.phone= encryptData(tempPhone);
    console.log(this._update.phone);
+}
     console.log("bue bye");
     // console.log(decryptData(this.phone));
     next();
@@ -98,8 +100,9 @@ userSchema.pre("findOneAndUpdate", async function (next) {
 userSchema.post("findOne", async function (doc ,next) {
     // this.password = await bcrypt.hash(this.password, 7);
     // console.log(doc);
-    console.log( encryptData("01100113935"));
-    doc.phone = decryptData(doc.phone);
+    // console.log( encryptData("01100113935"));
+    if(doc)
+        doc.phone = decryptData(doc.phone);
     // console.log("log hello after find one: ", doc);
     // console.log(decryptData(this.phone));
     next();
