@@ -153,7 +153,7 @@ async function getAllPosts(req, res) {
 
 async function getAllUsersPosts(req, res) {
     let { pageNum, pageSize } = req.query;
-    await getAllPostsHandler(res, pageNum, pageSize, 'title desc ');
+    await getAllPostsHandler(res, pageNum, pageSize, 'title desc createdAt');
 }
 
 
