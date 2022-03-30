@@ -81,12 +81,26 @@ userSchema.pre("save", async function (next) {
     next();
 })
 
+userSchema.pre("findOneAndUpdate", async function (next) {
+    // this.password = await bcrypt.hash(this.password, 7);
+    console.log("before the doc of update *********************");
+    const tempPhone=this._update.phone;
+
+    console.log(tempPhone);
+   
+   this._update.phone= encryptData(tempPhone);
+   console.log(this._update.phone);
+    console.log("bue bye");
+    // console.log(decryptData(this.phone));
+    next();
+})
+
 userSchema.post("findOne", async function (doc ,next) {
     // this.password = await bcrypt.hash(this.password, 7);
-    console.log(doc.phone);
-     
+    // console.log(doc);
+    console.log( encryptData("01100113935"));
     doc.phone = decryptData(doc.phone);
-    console.log("log hello after find one: ", doc);
+    // console.log("log hello after find one: ", doc);
     // console.log(decryptData(this.phone));
     next();
 })
@@ -98,7 +112,7 @@ module.exports = userSchema;
 // user Id: 6216e553240f736ca10e5fb6 .
 //user Token :
 /**   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTZlM2FhZTJkYjUwNmQ3MjFmN2Y1YiIsImVtYWlsIjoiYW1pcmFlenphdEBtb3plai5jb20iLCJpYXQiOjE2NDU2NjczMDYsImV4cCI6MTY0NTY3MDkwNn0.CZJqqLi8OvGXQOEa5Oil-ysXxAjcmNbcCsincAGfheY  */
-
+ 
 //****************
 
 // admin email : amiraezzat@mailna.co
