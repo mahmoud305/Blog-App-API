@@ -115,7 +115,7 @@ async function getProfilePosts(req, res) {
         const user = await getUser(email);
         if (userId == id || user.role != "user") { // the owner of the post and the admin has the authority to delete a post.
             let condition = { CreatedBy: userId };
-            let posts = await postModel.find(condition).skip(skip).limit(limit);
+            let posts = await postModel.find(condition).skip(skip).limit(limit).sort({createdAt:-1});
             const totalCount = await countObjects( postModel,condition);
             successCase(res, { totalCount, posts });
         }
@@ -137,7 +137,7 @@ async function getAllPostsHandler(res, pageNum, pageSize, projection, validPosts
         let posts = await postModel.find(condition , projection).populate({
             path: 'CreatedBy',
             select: 'name email _id'
-        }).skip(skip).limit(limit);//.sort({"verified":-1}) to get the verified emails first . 
+        }).skip(skip).limit(limit).sort({createdAt:-1}) to get the verified emails first . 
         successCase(res, { totalCount, posts } );
         // successCase(res, );
     } catch (error) {
