@@ -178,7 +178,7 @@ __add what between brackets to the [base URL](#base-url) to use this endpoint__
 * Phone: +02-01102488789.
 
 
-#### It's my pleasure to here your feedback ☀️😊.
+#### It's my pleasure to hear your feedback ☀️😊.
 <p align="right">(<a href="#blog-app-api">back to top</a>)</p>
 
 
