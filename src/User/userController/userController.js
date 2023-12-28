@@ -37,11 +37,11 @@ function AddUser(res, name, email, password, cPassword, location, phone, current
 
                 }
                 else {
-                    failureCase(res, " this email already registered", "", StatusCodes.BAD_REQUEST);
+                    failureCase(res, " this email already registered", "", StatusCodes.OK);
                 }
             }
             else {
-                failureCase(res, "password and confirmation password doesnot match", "", StatusCodes.BAD_REQUEST);
+                failureCase(res, "password and confirmation password doesnot match", "", StatusCodes.OK);
             }
 
         } catch (error) {
